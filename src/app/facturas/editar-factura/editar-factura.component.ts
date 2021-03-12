@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FacturasService } from 'src/app/servicios/facturas.service';
 import { ValidateCif } from 'src/app/validators/cif.validator';
 
@@ -14,9 +14,11 @@ export class EditarFacturaComponent implements OnInit {
   formFra: FormGroup;
   importeIVA: number = 0;
   totalFra: number = 0;
-  
+  _id: any;
+
   constructor(private facturasService: FacturasService,
-              private router: Router) { }
+              private router: Router,
+              private ruta: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.formFra = new FormGroup({
@@ -28,7 +30,16 @@ export class EditarFacturaComponent implements OnInit {
       // importeIVA: new FormControl(0),
       // totalFra: new FormControl(0)
     })
-    this.actualizarFra()
+    this.actualizarFra();
+    this._id = this.ruta.snapshot.params._id;
+    this.facturasService.getFactura(this._id)
+                        .subscribe((resp: any) => {
+                          this.formFra.patchValue(resp.factura);
+                          // this.formFra.get(<campo>).pathValue(<resp.campoAPI>) Uno por cada input
+                        },
+                        (err: any) => {
+                          console.log(err);
+                        })
   }
 
   actualizarFra() {
@@ -42,7 +53,13 @@ export class EditarFacturaComponent implements OnInit {
   }
 
   editarFactura() {
-
+    this.facturasService.putFactura(this._id, this.formFra.value)
+                        .subscribe((resp: any) => {
+                          this.router.navigate(['/']);
+                        }, 
+                        (err: any) => {
+                          console.log(err);
+                        })
   }
 
 }

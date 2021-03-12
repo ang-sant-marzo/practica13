@@ -16,6 +16,7 @@
             <td *ngIf="!loading">{{factura.cliente}}</td>
             <td *ngIf="!loading">{{factura.fecha}}</td>
             <td *ngIf="!loading">{{factura.baseImponible}}</td>
+            <td routerLink="/editar-factura/{{factura._id}}">Editar</td>
         </tr>
     </table>
 </div>

@@ -21,8 +21,26 @@ export class FacturasService {
                     )
   }
 
-  postFactura(factura) {
+  getFactura(_id: any) {
+    return this.http.get(this.url + '/factura/' + _id )
+                    .pipe(
+                      map((resp: any) => {
+                        return resp
+                      })
+                    )
+  }
+
+  postFactura(factura: any) {
     return this.http.post(this.url + '/factura', factura)
+                    .pipe(
+                      map((resp: any) => {
+                        return resp
+                      })
+                    )
+  }
+
+  putFactura(_id: any, factura: any) {
+    return this.http.put(this.url + '/factura/' + _id, factura)
                     .pipe(
                       map((resp: any) => {
                         return resp

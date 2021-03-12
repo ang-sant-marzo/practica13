@@ -1,0 +1,64 @@
+<div class="card l">
+    <h1>Ejemplo de formulario driven/reactive</h1>
+    <hr>
+    <form [formGroup]="formFra" (ngSubmit)="editarFactura()">
+        <div class="input-row">
+            <label>
+                Cliente
+                <span class="alert" *ngIf="formFra.controls.cliente.dirty && formFra.controls.cliente.errors && formFra.controls.cliente.errors.required">
+                    *
+                </span>
+                <span class="alert" *ngIf="formFra.controls.cliente.dirty && formFra.controls.cliente.errors && formFra.controls.cliente.errors.minlength">
+                    El nombre del cliente debe tener más de 4 caractéres
+                </span>
+                <span class="valid" *ngIf="formFra.controls.cliente.valid">
+                    &#10003;
+                </span>
+            </label>
+            <input type="text" formControlName="cliente">
+        </div>
+        <div class="input-row">
+            <label>
+                CIF
+                <span class="alert" *ngIf="formFra.controls.cif.errors && formFra.controls.cif.errors.invalidCif">
+                    {{formFra.controls.cif.errors.mensaje}}
+                </span>
+                <span class="valid" *ngIf="formFra.controls.cif.valid">
+                    &#10003;
+                </span>
+            </label>
+            <input type="text" formControlName="cif" maxlength=9>
+        </div>
+        <div class="input-row">
+            <label>Fecha</label>
+            <input type="date" formControlName="fecha">
+        </div>
+        <div class="input-row">
+            <label>Base imponible</label>
+            <input type="number" formControlName="baseImponible">
+        </div>
+        <div class="input-row">
+            <label>% IVA</label>
+            <select formControlName="tipoIVA">
+                <option value=0>0 %</option>
+                <option value=0.04>4 %</option>
+                <option value=0.1>10 %</option>
+                <option value=0.21>21 %</option>
+            </select>
+        </div>
+        <div class="input-row">
+            <label>Importe IVA</label>
+            <!-- <input type="number" formControlName="importeIVA" readonly> -->
+            <input type="number" [value]="importeIVA" readonly> <!-- Esta opción permite implementar un pipe-->
+        </div>
+        <div class="input-row">
+            <label>Total Factura</label>
+            <!-- <input type="number" formControlName="totalFra" readonly> -->
+            <input type="number" [value]="totalFra" readonly>
+        </div>
+        <div class="buttons-row">
+            <button type="button" class="outline" routerLink="/">Cancelar</button>
+            <button type="submit" [disabled]="formFra.invalid">Guardar cambios</button>
+        </div>
+    </form>
+</div>

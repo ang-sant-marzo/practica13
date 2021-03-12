@@ -16,8 +16,12 @@
             <td *ngIf="!loading">{{factura.cliente}}</td>
             <td *ngIf="!loading">{{factura.fecha}}</td>
             <td *ngIf="!loading">{{factura.baseImponible}}</td>
-            <td routerLink="/editar-factura/{{factura._id}}">Editar</td>
-            <td (click)="deleteFactura(factura._id)">Eliminar</td><!-- No hacer sin modal de confirmación-->
+            <td>
+                <button routerLink="/editar-factura/{{factura._id}}">Editar</button>
+            </td>
+            <td>
+                <button (click)="deleteFactura(factura._id)">Eliminar</button>
+            </td><!-- No hacer sin modal de confirmación-->
         </tr>
     </table>
 </div>

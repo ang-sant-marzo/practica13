@@ -1,1 +1,20 @@
-<p>listado-facturas works!</p>
+<div class="card xl">
+    <div class="titles-row">
+        <h1>Listado facturas</h1>
+    </div>
+    <table>
+        <tr>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Base Imponible</th>
+        </tr>
+        <tr *ngIf="loading">
+            <td>Cargando facturas...</td>
+        </tr>
+        <tr *ngFor="let factura of facturas">
+            <td *ngIf="!loading">{{factura.cliente}}</td>
+            <td *ngIf="!loading">{{factura.fecha}}</td>
+            <td *ngIf="!loading">{{factura.baseImponible}}</td>
+        </tr>
+    </table>
+</div>

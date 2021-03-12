@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'practica13';
+     ngOnInit() {
+       localStorage.setItem('token', '134');
+     }
 }

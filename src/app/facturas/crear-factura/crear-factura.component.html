@@ -57,9 +57,8 @@
             <input type="number" [value]="totalFra" readonly>
         </div>
         <div class="buttons-row">
+            <button type="button" class="outline" routerLink="/">Cancelar</button>
             <button type="submit" [disabled]="formFra.invalid">Añadir</button>
         </div>
     </form>
-    <pre>{{formFra.value | json}}</pre>
-    <pre>{{formFra.controls.cliente.errors | json}}</pre>
 </div>

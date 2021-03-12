@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FacturasService } from 'src/app/servicios/facturas.service';
 import { ValidateCif } from 'src/app/validators/cif.validator';
 
@@ -14,7 +15,8 @@ export class CrearFacturaComponent implements OnInit {
   importeIVA: number = 0;
   totalFra: number = 0;
   
-  constructor(private facturasService: FacturasService) { }
+  constructor(private facturasService: FacturasService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.formFra = new FormGroup({
@@ -42,7 +44,7 @@ export class CrearFacturaComponent implements OnInit {
   crearFactura() {
     this.facturasService.postFactura(this.formFra.value)
                         .subscribe((resp: any) => {
-                          console.log(resp);
+                          this.router.navigate(['/']);
                         }, 
                         (err: any) => {
                           console.log(err);
